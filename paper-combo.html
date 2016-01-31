@@ -12,6 +12,15 @@ Material Design Dropdown/Typeahead/Combobox control
 -->
 <dom-module id="paper-combo">
   <style is="custom-style">
+    #input {
+      cursor: pointer;
+    }
+    :host([type='typeahead']) #input {
+      cursor: text;
+    }
+    :host([type='combobox']) #input {
+      cursor: text;
+    }
     #dropdown {
       margin-top: 56px;
       background-color: #FFFFFF;
@@ -20,6 +29,7 @@ Material Design Dropdown/Typeahead/Combobox control
     #dropdown-icon {
       position: absolute;
       right: 0;
+      cursor: pointer;
     }
     iron-selector {
       cursor: pointer;
