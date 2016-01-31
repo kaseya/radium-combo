@@ -1,4 +1,4 @@
 # paper-combo
-Polymer select/combobox element
+Material Design Dropdown/Typeahead/Combobox control
 
 Coming Soon!
