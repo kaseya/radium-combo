@@ -352,7 +352,7 @@ Material Design Dropdown/Typeahead/Combobox control
       _updateAndDispatch: function(value, dispatch) {
         this.value = value;
         if (typeof dispatch !== 'undefined' && dispatch === true) {
-          this.fire('option-change', this.value);
+          this.fire('option-change', {label:value.__label, value:value.__value});
         }
       },
       _applyInitialValue: function() {

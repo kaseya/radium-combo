@@ -10,7 +10,7 @@
   <style>body { font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif; }</style>
   <style is="custom-style">
     #demo-container {
-      padding: 2% !important;
+      padding: 0px 2% !important;
       height: 100%;
     }
     .example-title {
@@ -27,6 +27,20 @@
       display: inline-block;
       vertical-align: top;
     }
+    .event-label {
+      font-weight: bold;
+      font-size: 14px;
+      display: inline-block;
+      margin-top: 48px;
+    }
+    .event-string {
+      font-style: italic;
+      font-size: 10px;
+      display: inline-block;
+      padding-left: 16px;
+      line-height: 19px;
+      vertical-align: middle;
+    }
   </style>
 </head>
 <body unresolved>
@@ -34,34 +48,35 @@
     <h2>paper-combo</h2>
     <div id="demo-container">
       <div class="example-col">
-        <div class="example-title">default</div>
+        <div class="example-title">Select w/ empty option label</div>
         <div class="example-selected">Selected - <span>[[_selected1.label]]</span></div>
         <paper-combo options="[[_myoptions]]" value="{{_selected1}}" empty-option-label="--unselect--"
             on-option-change="_optionSelected"></paper-combo>
-        <div class="example-title">w/ initial value</div>
+        <div class="example-title">Select w/ initial value</div>
         <div class="example-selected">Selected - <span>[[_selected2.label]]</span></div>
         <paper-combo options="[[_myoptions]]" value="{{_selected2}}"
             on-option-change="_optionSelected"></paper-combo>
-        <div class="example-title">no empty value (force selection)</div>
+        <div class="example-title">Select w/ no empty value (force selection)</div>
         <div class="example-selected">Selected - <span>[[_selected3.label]]</span></div>
         <paper-combo options="[[_myoptions]]" include-empty="false" value="{{_selected3}}"
             on-option-change="_optionSelected"></paper-combo>
       </div>
       <div class="example-col" style="margin-left: 3%">
-        <div class="example-title">disabled</div>
+        <div class="example-title">Disabled</div>
         <div class="example-selected">Selected - <span>[[_selected4.label]]</span></div>
         <paper-combo options="[[_myoptions]]" disabled value="{{_selected4}}"
             on-option-change="_optionSelected"></paper-combo>
-        <div class="example-title">typeahead</div>
+        <div class="example-title">Typeahead</div>
         <div class="example-selected">Selected - <span>[[_selected5.label]]</span></div>
         <paper-combo options="[[_myoptions]]" type="typeahead" value="{{_selected5}}"
             on-option-change="_optionSelected"></paper-combo>
-        <div class="example-title">combobox</div>
+        <div class="example-title">Combobox</div>
         <div class="example-selected">Selected - <span>[[_selected6.label]]</span></div>
         <paper-combo options="[[_myoptions]]" type="combobox" value="{{_selected6}}"
             on-option-change="_optionSelected"></paper-combo>
       </div>
-    </div>
+    </div><br>
+    <div class="event-label">Option Change Event:</div><div class="event-string">[[_lastEvent]]</div>
   </template>
   <script>
     app._myoptions = [{label:'Joe', value:'1'}
@@ -76,8 +91,7 @@
     app._selected2 = app._myoptions[2];
 
     app._optionSelected = function(e) {
-      //you can use this event, as an alternative to binding
-      console.log('Selection: ' + e.detail.label + '|' + e.detail.value);
+      app._lastEvent = JSON.stringify(e.detail);
     }
   </script>
 </body>
