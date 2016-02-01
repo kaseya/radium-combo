@@ -35,7 +35,8 @@
     "iron-icons": "PolymerElements/iron-icons#^1.0.4",
     "iron-selector": "PolymerElements/iron-selector#^1.0.8",
     "paper-input": "PolymerElements/paper-input#^1.1.2",
-    "paper-item": "PolymerElements/paper-item#^1.0.5"
+    "paper-item": "PolymerElements/paper-item#^1.0.5",
+    "paper-combo": "jasongardnerlv/paper-combo"
   },
   "devDependencies": {
 
