@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>paper-combo</title>
+  <title>radium-combo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
@@ -10,7 +10,7 @@
   <script src="../../test-fixture/test-fixture-mocha.js"></script>
 
   <link rel="import" href="../../test-fixture/test-fixture.html">
-  <link rel="import" href="../paper-combo.html">
+  <link rel="import" href="../radium-combo.html">
 
   <style>
 
@@ -19,13 +19,13 @@
 <body>
   <test-fixture id="WithLabel">
     <template>
-      <paper-combo label="foobarbaz"></paper-combo>
+      <radium-combo label="foobarbaz"></radium-combo>
     </template>
   </test-fixture>
 
   <test-fixture id="WithDisabled">
     <template>
-      <paper-combo disabled></paper-combo>
+      <radium-combo disabled></radium-combo>
     </template>
   </test-fixture>
   <script>
@@ -33,7 +33,7 @@
     * These tests are just something to get started.  Need to write
     * the real tests soon.
     */
-    suite('<paper-combo>', function () {
+    suite('<radium-combo>', function () {
       var select;
 
       suite('with a label', function () {
