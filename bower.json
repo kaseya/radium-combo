@@ -1,5 +1,5 @@
 {
-  "name": "paper-combo",
+  "name": "radium-combo",
   "version": "0.0.1",
   "description": "Material Design Dropdown/Typeahead/Combobox control",
   "authors": [
@@ -12,15 +12,15 @@
     "dropdown"
   ],
   "main": [
-    "paper-combo.html"
+    "radium-combo.html"
   ],
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git://github.com/jasongardnerlv/paper-combo.git"
+    "url": "git://github.com/jasongardnerlv/radium-combo.git"
   },
   "license": "MIT",
-  "homepage": "https://github.com/jasongardnerlv/paper-combo",
+  "homepage": "https://github.com/jasongardnerlv/radium-combo",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -36,7 +36,7 @@
     "iron-selector": "PolymerElements/iron-selector#^1.0.8",
     "paper-input": "PolymerElements/paper-input#^1.1.2",
     "paper-item": "PolymerElements/paper-item#^1.0.5",
-    "paper-combo": "jasongardnerlv/paper-combo"
+    "radium-combo": "jasongardnerlv/radium-combo"
   },
   "devDependencies": {
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0",

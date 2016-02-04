@@ -1,25 +1,26 @@
 {
-  "name": "paper-combo",
+  "name": "radium-combo",
   "description": "Material Design Dropdown/Typeahead/Combobox control",
   "authors": [
     "jason gardner <jason.gardner.lv@gmail.com>"
   ],
   "keywords": [
-    "paper",
+    "radium",
+    "polymer",
     "select",
     "combobox",
     "dropdown"
   ],
   "main": [
-    "paper-combo.html"
+    "radium-combo.html"
   ],
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git://github.com/jasongardnerlv/paper-combo.git"
+    "url": "git://github.com/jasongardnerlv/radium-combo.git"
   },
   "license": "MIT",
-  "homepage": "https://github.com/jasongardnerlv/paper-combo",
+  "homepage": "https://github.com/jasongardnerlv/radium-combo",
   "ignore": [],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.2.3",
@@ -35,13 +36,13 @@
     "web-component-tester": "Polymer/web-component-tester#^3.3.0",
     "test-fixture": "PolymerElements/test-fixture#^1.0.0"
   },
-  "_release": "1b0926a71d",
+  "_release": "ca5b514dcb",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "1b0926a71dfcec3276664713ef06fcd7fcd9f7b3"
+    "commit": "ca5b514dcb52a2e283b4f30e212bad7354741ee9"
   },
-  "_source": "git://github.com/jasongardnerlv/paper-combo.git",
+  "_source": "git://github.com/jasongardnerlv/radium-combo.git",
   "_target": "*",
-  "_originalSource": "jasongardnerlv/paper-combo"
+  "_originalSource": "jasongardnerlv/radium-combo"
 }
