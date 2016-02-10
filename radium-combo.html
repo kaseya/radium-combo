@@ -47,7 +47,7 @@ Material Design Dropdown/Typeahead/Combobox control
   </style>
   <template>
     <paper-input-container id="input-container" on-click="_dropdownAction" disabled$="[[disabled]]" tabindex="0"
-      on-keydown="_containerKeyHandler">
+      no-label-float="[[noLabelFloat]]" on-keydown="_containerKeyHandler">
       <label>[[label]]</label>
       <input id="input" is="iron-input" type="text" on-input="_inputValueChanged" on-blur="_onInputBlur"
         on-keydown="_keyHandler" disabled class="paper-input-input"></input>
@@ -93,6 +93,10 @@ Material Design Dropdown/Typeahead/Combobox control
           type: String,
           value: ""
         },
+        /**
+         * Hide the floating label
+         */
+        noLabelFloat:Boolean,
         /**
          * Whether or not the control should be disabled
          */
