@@ -350,7 +350,7 @@ Material Design Dropdown/Typeahead/Combobox control
         this._filteredOptions = newArr;
       },
       _updateSelected: function(e) {
-        if (e !== null && (e.target.nodeName.toLowerCase() === 'paper-item' ||
+        if (e && (e.target.nodeName.toLowerCase() === 'paper-item' ||
             e.target.parentNode.nodeName.toLowerCase() === 'paper-item')) {
           var selIdx = this.$.selector.selected;
           if (selIdx !== undefined) {
