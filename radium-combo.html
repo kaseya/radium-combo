@@ -66,8 +66,9 @@ Material Design Dropdown/Typeahead/Combobox control
     }
   </style>
   <template>
-    <paper-input-container id="input-container" on-tap="_dropdownAction" disabled$="[[disabled]]" tabindex="0"
-      no-label-float="[[noLabelFloat]]" on-keydown="_containerKeyHandler">
+    <paper-input-container id="input-container" disabled$="[[disabled]]" tabindex="0"
+      always-float-label="[[alwaysFloatLabel]]"  no-label-float="[[noLabelFloat]]"
+      on-keydown="_containerKeyHandler" on-tap="_dropdownAction" >
       <label>[[label]]</label>
       <input id="input" is="iron-input" type="text" autocomplete="off" on-input="_inputValueChanged" on-blur="_onInputBlur"
         on-keydown="_keyHandler" disabled class="paper-input-input"></input>
@@ -112,6 +113,13 @@ Material Design Dropdown/Typeahead/Combobox control
         Polymer.IronSelectableBehavior
       ],
       properties: {
+        /**
+         * Always float the floating label.
+         */
+        alwaysFloatLabel: {
+          type: Boolean,
+          value: false
+        },
         /**
          * Optional floating label for the input control
          */
