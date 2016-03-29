@@ -38,6 +38,14 @@ Material Design Dropdown/Typeahead/Combobox control
     :host([no-label-float]) #dropdown {
       margin-top: 36px;
     }
+    #clear-icon {
+      position: absolute;
+      right: 24px;
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
+      padding: 2px;
+    }
     #dropdown-icon {
       position: absolute;
       right: 0;
@@ -58,11 +66,12 @@ Material Design Dropdown/Typeahead/Combobox control
     }
   </style>
   <template>
-    <paper-input-container id="input-container" on-click="_dropdownAction" disabled$="[[disabled]]" tabindex="0"
+    <paper-input-container id="input-container" on-tap="_dropdownAction" disabled$="[[disabled]]" tabindex="0"
       no-label-float="[[noLabelFloat]]" on-keydown="_containerKeyHandler">
       <label>[[label]]</label>
       <input id="input" is="iron-input" type="text" autocomplete="off" on-input="_inputValueChanged" on-blur="_onInputBlur"
         on-keydown="_keyHandler" disabled class="paper-input-input"></input>
+      <iron-icon id="clear-icon" icon="clear" hidden$="[[!_showClearIcon(showClearButton, _inputValue)]]" on-tap="_clearTapped"></iron-icon>
       <iron-icon id="dropdown-icon" icon="[[_dropdownIcon()]]"></iron-icon>
     </paper-input-container>
     <iron-dropdown id="dropdown" on-iron-overlay-closed="_dropdownClosed">
@@ -71,6 +80,11 @@ Material Design Dropdown/Typeahead/Combobox control
           <template is="dom-if" if="[[_checkShowEmpty(_showEmpty, type)]]">
             <paper-item on-down="_selectItem" on-click="_hideDropdown" value="">
               <span>[[emptyOptionLabel]]</span>
+            </paper-item>
+          </template>
+          <template is="dom-if" if="[[_checkShowNoMatches(noMatchesLabel, type, _filteredOptions)]]">
+            <paper-item value="">
+              <span>[[noMatchesLabel]]</span>
             </paper-item>
           </template>
           <template is="dom-repeat" items="[[_filteredOptions]]">
@@ -157,6 +171,13 @@ Material Design Dropdown/Typeahead/Combobox control
           type: String
         },
         /**
+         * Placeholder text if no matches (for typeahead).
+         */
+        noMatchesLabel: {
+          type: String,
+          value: 'No matches'
+        },
+        /**
          * The type of selection control
          * Choices are:
          *    dropdown
@@ -177,9 +198,21 @@ Material Design Dropdown/Typeahead/Combobox control
           value: 'true',
           observer: '_emptyChanged'
         },
+        /**
+         * Whether or not to include a clear button in the input, allowing the
+         * user to unselect
+         */
+        showClearButton: {
+          type: Boolean,
+          value: false
+        },
         _showEmpty: {
           type: Boolean,
           value: true
+        },
+        _inputValue: {
+          type: String,
+          value: ''
         },
         _optionsInternal: {
           type: Array,
@@ -279,8 +312,14 @@ Material Design Dropdown/Typeahead/Combobox control
       _isDropdown: function() {
         return (this.type.toLowerCase() !== 'combobox' && this.type.toLowerCase() !== 'typeahead');
       },
+      _showClearIcon: function(showClearButton, inputValue) {
+        return showClearButton && inputValue && inputValue.length > 0;
+      },
       _checkShowEmpty: function(e, t) {
         return (e === true && this._isDropdown);
+      },
+      _checkShowNoMatches: function(noMatchesLabel, type, options) {
+        return (noMatchesLabel && noMatchesLabel.length > 0 && type.toLowerCase() === 'typeahead' && options.length === 0);
       },
       _dropdownIcon: function() {
         if (this._open) {
@@ -332,11 +371,17 @@ Material Design Dropdown/Typeahead/Combobox control
       _dropdownClosed: function() {
         this._open = false;
       },
+      _clearTapped: function (e) {
+        e.stopImmediatePropagation();
+
+        this.clearSelection(true);
+      },
       _handleFloatingLabel: function(value) {
         this.$['input-container']._inputHasContent = !(!value || value === null || value === '');
       },
       _inputValueChanged: function(e) {
         var input = e.target.value;
+        this._inputValue = input;
         this._handleFloatingLabel(input);
         this._filterOptions(input);
         // Select the dropdown item based on the current input.
@@ -490,6 +535,7 @@ Material Design Dropdown/Typeahead/Combobox control
       },
       _setInputValue: function(v) {
         this._handleFloatingLabel(v);
+        this._inputValue = v;
         this.$.input.value = v;
       },
       _setSelectorSelected: function(idx) {
