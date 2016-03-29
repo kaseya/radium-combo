@@ -52,7 +52,7 @@ Material Design Dropdown/Typeahead/Combobox control
     <paper-input-container id="input-container" on-click="_dropdownAction" disabled$="[[disabled]]" tabindex="0"
       no-label-float="[[noLabelFloat]]" on-keydown="_containerKeyHandler">
       <label>[[label]]</label>
-      <input id="input" is="iron-input" type="text" on-input="_inputValueChanged" on-blur="_onInputBlur"
+      <input id="input" is="iron-input" type="text" autocomplete="off" on-input="_inputValueChanged" on-blur="_onInputBlur"
         on-keydown="_keyHandler" disabled class="paper-input-input"></input>
       <iron-icon id="dropdown-icon" icon="[[_dropdownIcon()]]"></iron-icon>
     </paper-input-container>
