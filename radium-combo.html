@@ -21,6 +21,15 @@ Material Design Dropdown/Typeahead/Combobox control
     :host([type='combobox']) #input {
       cursor: text;
     }
+    label, #input {
+      padding-right: 24px;
+      box-sizing: border-box;
+    }
+    #input {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     #dropdown {
       margin-top: 56px;
       background-color: #FFFFFF;
