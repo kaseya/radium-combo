@@ -415,7 +415,7 @@ Material Design Dropdown/Typeahead/Combobox control
         this.setValue(item.value, true);
       },
       _updateAndDispatch: function(value, dispatch) {
-        if (this.value.value !== value.__value) {
+        if (this.value.__label !== value.__label && this.value.__value !== value.__value) {
           this.value = value;
           if (dispatch === true) {
             this.fire('option-change', {label:value.__label, value:value.__value});
