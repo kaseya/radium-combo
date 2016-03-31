@@ -476,13 +476,20 @@ Material Design Dropdown/Typeahead/Combobox control
         var option = this._filteredOptions[(this._showEmpty === true) ? idx - 1 : idx];
         this.$.input.value = (option) ? option.__label : '';
 
+        var dropdown = this.$.selector.parentNode;
+
         var itemHeight = 49;
-        var numVisible = Math.floor(this.$.selector.parentNode.offsetHeight / itemHeight);
+        var numVisible = Math.floor(dropdown.offsetHeight / itemHeight);
+        var startVisibleIdx = Math.floor(dropdown.scrollTop / itemHeight);
         if (isUp) {
-          this.$.selector.parentNode.scrollTop = (idx < this._filteredOptions.length - numVisible) ? idx * itemHeight :
-                                        ((this._filteredOptions.length - 1) * itemHeight);
-        } else {
-          this.$.selector.parentNode.scrollTop = (idx >= numVisible) ? idx * itemHeight : 0;
+          if (idx < startVisibleIdx) {
+            dropdown.scrollTop = idx * itemHeight;
+          }
+        }
+        else {
+          if (idx >= startVisibleIdx + numVisible) {
+            dropdown.scrollTop = (idx - (numVisible - 1)) * itemHeight;
+          }
         }
       },
       _findLabelMatch: function(lbl) {
