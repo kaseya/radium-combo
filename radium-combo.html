@@ -353,6 +353,7 @@ Material Design Dropdown/Typeahead/Combobox control
         }
         if (node === null) {
           this.async(function() {
+            this._applyValueFromInput();
             this._hideDropdown();
           }, 10);
         }
@@ -471,7 +472,10 @@ Material Design Dropdown/Typeahead/Combobox control
         }
 
         this.$.selector.selected = idx;
-        this.value = this._filteredOptions[(this._showEmpty === true) ? idx - 1 : idx];
+
+        var option = this._filteredOptions[(this._showEmpty === true) ? idx - 1 : idx];
+        this.$.input.value = (option) ? option.__label : '';
+
         var itemHeight = 49;
         var numVisible = Math.floor(this.$.selector.parentNode.offsetHeight / itemHeight);
         if (isUp) {
