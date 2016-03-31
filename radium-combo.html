@@ -144,8 +144,8 @@ Material Design Dropdown/Typeahead/Combobox control
          * Currently selected value
          */
         value: {
-          type: String,
-          value: '',
+          type: Object,
+          value: function() { return {}; },
           notify: true,
           observer: '_valueChanged'
         },
@@ -415,7 +415,7 @@ Material Design Dropdown/Typeahead/Combobox control
         this.setValue(item.value, true);
       },
       _updateAndDispatch: function(value, dispatch) {
-        if (this.value !== value) {
+        if (this.value.value !== value.__value) {
           this.value = value;
           if (dispatch === true) {
             this.fire('option-change', {label:value.__label, value:value.__value});
