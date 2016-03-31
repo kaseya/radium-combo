@@ -77,15 +77,15 @@ Material Design Dropdown/Typeahead/Combobox control
     </paper-input-container>
     <iron-dropdown id="dropdown" on-iron-overlay-closed="_dropdownClosed">
       <div class="dropdown-content">
+        <template is="dom-if" if="[[_checkShowNoMatches(noMatchesLabel, type, _filteredOptions)]]">
+          <paper-item value="">
+            <span>[[noMatchesLabel]]</span>
+          </paper-item>
+        </template>
         <iron-selector id="selector" attrForSelected="value">
           <template is="dom-if" if="[[_checkShowEmpty(_showEmpty, type)]]">
             <paper-item on-down="_selectItem" on-click="_hideDropdown" value="">
               <span>[[emptyOptionLabel]]</span>
-            </paper-item>
-          </template>
-          <template is="dom-if" if="[[_checkShowNoMatches(noMatchesLabel, type, _filteredOptions)]]">
-            <paper-item value="">
-              <span>[[noMatchesLabel]]</span>
             </paper-item>
           </template>
           <template is="dom-repeat" items="[[_filteredOptions]]">
