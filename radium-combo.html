@@ -365,7 +365,8 @@ Material Design Dropdown/Typeahead/Combobox control
           this.$.dropdown.style.width = this.$['input-container'].offsetWidth + 'px';
           this.$.dropdown.positionTarget = this;
           this.$.dropdown.open();
-          if (this.$.input.value === this.value.__label && this.value.__value !== undefined) {
+          var isListItemSelected = this.value.__label !== undefined && this.value.__value !== undefined;
+          if (this.$.input.value === this.value.__label && isListItemSelected) {
             this._filterOptions('');
           }
           // Select the dropdown item based on the current value.
