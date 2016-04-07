@@ -75,7 +75,7 @@ Material Design Dropdown/Typeahead/Combobox control
       <iron-icon id="clear-icon" icon="clear" hidden$="[[!_showClearIcon(showClearButton, _inputValue)]]" on-tap="_clearTapped"></iron-icon>
       <iron-icon id="dropdown-icon" icon="[[_dropdownIcon()]]"></iron-icon>
     </paper-input-container>
-    <iron-dropdown id="dropdown" on-iron-overlay-closed="_dropdownClosed">
+    <iron-dropdown id="dropdown" on-iron-overlay-opened="_dropdownOpened" on-iron-overlay-closed="_dropdownClosed">
       <div class="dropdown-content">
         <template is="dom-if" if="[[_checkShowNoMatches(noMatchesLabel, type, _filteredOptions)]]">
           <paper-item value="">
@@ -378,6 +378,14 @@ Material Design Dropdown/Typeahead/Combobox control
           this._open = false;
           document.removeEventListener('click', this._boundOnCaptureClick, true);
           this.$.dropdown.close();
+        }
+      },
+      _dropdownOpened: function() {
+        // Conditional workaround to eliminate menu overlap introduced only by newer versions of iron-dropdown.
+        var inputRect = this.$['input-container'].getBoundingClientRect();
+        var dropdownRect = this.$.dropdown.getBoundingClientRect();
+        if (inputRect.top === dropdownRect.top) {
+          this.$.dropdown.verticalOffset = inputRect.height;
         }
       },
       _dropdownClosed: function() {
