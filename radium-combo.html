@@ -576,7 +576,7 @@ Material Design Dropdown/Typeahead/Combobox control
           this.$.selector.selected = idx;
         }
       },
-      _setValue(lbl, match, dispatch) {
+      _setValue: function(lbl, match, dispatch) {
         if (match !== null) {
           this._setInputValue(match.match.__label || '');
           this._updateAndDispatch(match.match, dispatch);
