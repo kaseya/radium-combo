@@ -30,6 +30,9 @@ Material Design Dropdown/Typeahead/Combobox control
       overflow: hidden;
       text-overflow: ellipsis;
     }
+    #input.clear-shown {
+      padding-right: 48px;
+    }
     #dropdown {
       margin-top: 56px;
       background-color: #FFFFFF;
@@ -64,11 +67,16 @@ Material Design Dropdown/Typeahead/Combobox control
     paper-input-container:focus {
      outline: 0;
     }
+    paper-item span {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow-x: hidden;
+    }
   </style>
   <template>
     <paper-input-container id="input-container" disabled$="[[disabled]]" tabindex="0"
       always-float-label="[[alwaysFloatLabel]]"  no-label-float="[[noLabelFloat]]"
-      on-keydown="_containerKeyHandler" on-tap="_dropdownAction" >
+      on-keydown="_containerKeyHandler" on-tap="_dropdownAction" title$="[[_inputValue]]">
       <label>[[label]]</label>
       <input id="input" is="iron-input" type="text" autocomplete="off" on-input="_inputValueChanged" on-blur="_onInputBlur"
         on-keydown="_keyHandler" disabled class="paper-input-input"></input>
@@ -90,7 +98,7 @@ Material Design Dropdown/Typeahead/Combobox control
           </template>
           <template is="dom-repeat" items="[[_filteredOptions]]">
             <paper-item on-down="_selectItem" on-click="_hideDropdown" value="[[item.__value]]">
-              <span>[[item.__label]]</span>
+              <span title$="[[item.__label]]">[[item.__label]]</span>
             </paper-item>
           </template>
         </iron-selector>
@@ -321,7 +329,9 @@ Material Design Dropdown/Typeahead/Combobox control
         return (this.type.toLowerCase() !== 'combobox' && this.type.toLowerCase() !== 'typeahead');
       },
       _showClearIcon: function(showClearButton, inputValue) {
-        return showClearButton && inputValue && inputValue.length > 0;
+        var iconShown = showClearButton && inputValue && inputValue.length > 0;
+        this.toggleClass('clear-shown', iconShown, this.querySelector('#input'));
+        return iconShown;
       },
       _checkShowEmpty: function(e, t) {
         return (e === true && this._isDropdown);
