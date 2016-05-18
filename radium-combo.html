@@ -96,7 +96,7 @@ Material Design Dropdown/Typeahead/Combobox control
         </template>
         <iron-selector id="selector" attrForSelected="value">
           <template is="dom-if" if="[[_checkShowEmpty(_showEmpty, type)]]">
-            <paper-item on-down="_selectItem" on-click="_hideDropdown" value="">
+            <paper-item on-tap="_selectItem" value="">
               <span>[[emptyOptionLabel]]</span>
             </paper-item>
           </template>
@@ -436,8 +436,10 @@ Material Design Dropdown/Typeahead/Combobox control
         }
       },
       _selectItem: function(e) {
+        e.stopPropagation();
         var item = e.currentTarget;
         this.setValue(item.value, true);
+        this._hideDropdown();
       },
       _updateAndDispatch: function(value, dispatch) {
         if (!(this.value.__label === value.__label && this.value.__value === value.__value)) {
