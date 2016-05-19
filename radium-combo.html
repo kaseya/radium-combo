@@ -82,7 +82,8 @@ Material Design Dropdown/Typeahead/Combobox control
       always-float-label="[[alwaysFloatLabel]]"  no-label-float="[[noLabelFloat]]"
       on-keydown="_containerKeyHandler" on-tap="_dropdownAction" title$="[[_inputValue]]">
       <label>[[label]]</label>
-      <input id="input" is="iron-input" type="text" autocomplete="off" on-input="_inputValueChanged" on-blur="_onInputBlur"
+      <input id="input" is="iron-input" type="text" autocomplete="off" on-input="_inputValueChanged"
+        on-focus="_onInputFocus" on-blur="_onInputBlur"
         on-keydown="_keyHandler" disabled class="paper-input-input"></input>
       <iron-icon id="clear-icon" icon="clear" hidden$="[[!_showClearIcon(showClearButton, _inputValue)]]" on-tap="_clearTapped"></iron-icon>
       <iron-icon id="dropdown-icon" icon="[[_dropdownIcon()]]"></iron-icon>
@@ -96,12 +97,12 @@ Material Design Dropdown/Typeahead/Combobox control
         </template>
         <iron-selector id="selector" attrForSelected="value">
           <template is="dom-if" if="[[_checkShowEmpty(_showEmpty, type)]]">
-            <paper-item on-tap="_selectItem" value="">
+            <paper-item on-down="_onItemDown" on-tap="_selectItem" value="">
               <span>[[emptyOptionLabel]]</span>
             </paper-item>
           </template>
           <template is="dom-repeat" items="[[_filteredOptions]]">
-            <paper-item on-down="_selectItem" on-click="_hideDropdown" value="[[item.__value]]">
+            <paper-item on-down="_onItemDown" on-tap="_selectItem" value="[[item.__value]]">
               <span title$="[[item.__label]]">[[item.__label]]</span>
             </paper-item>
           </template>
@@ -246,11 +247,15 @@ Material Design Dropdown/Typeahead/Combobox control
           type: Boolean,
           value: false
         },
-        _boundOnCaptureClick: {
+        _boundOnCaptureTap: {
           type: Function,
           value: function() {
-            return this._onCaptureClick.bind(this);
+            return this._onCaptureTap.bind(this);
           }
+        },
+        _ignoreBlur: {
+          type: Boolean,
+          value: false
         }
       },
       observers: [
@@ -357,7 +362,7 @@ Material Design Dropdown/Typeahead/Combobox control
           this._openDropdown();
         }
       },
-      _onCaptureClick: function(e) {
+      _onCaptureTap: function(e) {
         var node = e.target;
         while (node != null) {
           if (node == this) {
@@ -366,6 +371,7 @@ Material Design Dropdown/Typeahead/Combobox control
           node = node.parentNode;
         }
         if (node === null) {
+          e.stopPropagation();
           this.async(function() {
             this._applyValueFromInput();
             this._hideDropdown();
@@ -375,7 +381,7 @@ Material Design Dropdown/Typeahead/Combobox control
       _openDropdown: function() {
         if (this._open === false) {
           this._open = true;
-          document.addEventListener('click', this._boundOnCaptureClick, true);
+          document.addEventListener('tap', this._boundOnCaptureTap, true);
           this.$.dropdown.style.width = this.$['input-container'].offsetWidth + 'px';
           this.$.dropdown.positionTarget = this;
           this.$.dropdown.open();
@@ -390,7 +396,7 @@ Material Design Dropdown/Typeahead/Combobox control
       _hideDropdown: function() {
         if (this._open === true) {
           this._open = false;
-          document.removeEventListener('click', this._boundOnCaptureClick, true);
+          document.removeEventListener('tap', this._boundOnCaptureTap, true);
           this.$.dropdown.close();
         }
       },
@@ -449,8 +455,18 @@ Material Design Dropdown/Typeahead/Combobox control
           }
         }
       },
+      _onItemDown: function(e) {
+        e.stopPropagation();
+        // NOTE: Input blur event fires after "down" but before "tap" - don't perform blur logic when an item is tapped.
+        this._ignoreBlur = true;
+      },
+      _onInputFocus: function() {
+        this._ignoreBlur = false;
+      },
       _onInputBlur: function() {
-        this._applyValueFromInput();
+        if (!this._ignoreBlur) {
+          this._applyValueFromInput();
+        }
       },
       _containerKeyHandler: function(e) {
         if (document.activeElement === this.$['input-container']) {
