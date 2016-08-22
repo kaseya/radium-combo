@@ -453,8 +453,7 @@ Material Design Dropdown/Typeahead/Combobox control
       },
       _containerKeyHandler: function(e) {
         if (document.activeElement === this.$['input-container']) {
-          if (this._open === false &&
-              (e.keyIdentifier.toLowerCase() === 'enter' || e.keyIdentifier.toLowerCase() === 'u+0020')) {
+          if (this._open === false && (e.key === 'Enter' || e.key === ' ')) {
             this._openDropdown();
           } else {
             this._keyHandler(e);
@@ -462,21 +461,21 @@ Material Design Dropdown/Typeahead/Combobox control
         }
       },
       _keyHandler: function(e) {
-        if (e.keyIdentifier.toLowerCase() === 'enter') {
+        if (e.key === 'Enter') {
           this._applyValueFromInput();
           return;
         }
-        if (this._open === true && e.keyIdentifier.toLowerCase() === 'u+0009') {
+        if (this._open === true && e.key === 'Control') {
           e.preventDefault();
           return;
         }
         this._handleKeyboardArrows(e);
       },
       _handleKeyboardArrows: function(e) {
-        if (e.keyIdentifier.toLowerCase() !== 'up' && e.keyIdentifier.toLowerCase() !== 'down') {
+        if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') {
           return;
         }
-        var isUp = (e.keyIdentifier.toLowerCase() === 'up');
+        var isUp = (e.key === 'ArrowUp');
         this._openDropdown();
         var idx = (typeof this.$.selector.selected === 'undefined') ? -1 : this.$.selector.selected;
         if (isUp === true) {
