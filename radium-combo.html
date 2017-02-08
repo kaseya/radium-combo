@@ -420,6 +420,8 @@ Material Design Dropdown/Typeahead/Combobox control
         }
       },
       _selectItem: function(e) {
+        e.stopImmediatePropagation();
+        
         var item = e.currentTarget;
         this.setValue(item.value, true);
         this._hideDropdown();
