@@ -90,7 +90,7 @@ Material Design Dropdown/Typeahead/Combobox control
       <iron-icon id="clear-icon" icon="clear" hidden$="[[!_showClearIcon(showClearButton, _inputValue)]]" on-tap="_clearTapped"></iron-icon>
       <iron-icon id="dropdown-icon" icon="[[_dropdownIcon(_open)]]"></iron-icon>
     </paper-input-container>
-    <iron-dropdown id="dropdown" no-cancel-on-outside-click no-overlap on-iron-overlay-opened="_dropdownOpened" on-iron-overlay-closed="_dropdownClosed">
+    <iron-dropdown id="dropdown" no-cancel-on-outside-click on-iron-overlay-opened="_dropdownOpened" on-iron-overlay-closed="_dropdownClosed">
       <div class="dropdown-content">
         <template is="dom-if" if="[[_checkShowNoMatches(noMatchesLabel, type, _filteredOptions)]]">
           <paper-item value="">
@@ -390,7 +390,7 @@ Material Design Dropdown/Typeahead/Combobox control
         this._open = false;
       },
       _clearTapped: function (e) {
-        e.stopImmediatePropagation();
+        e.stopPropagation();
 
         this.clearSelection(true);
       },
@@ -420,6 +420,8 @@ Material Design Dropdown/Typeahead/Combobox control
         }
       },
       _selectItem: function(e) {
+        e.stopPropagation();
+        
         var item = e.currentTarget;
         this.setValue(item.value, true);
         this._hideDropdown();
