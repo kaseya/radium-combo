@@ -390,7 +390,7 @@ Material Design Dropdown/Typeahead/Combobox control
         this._open = false;
       },
       _clearTapped: function (e) {
-        e.stopImmediatePropagation();
+        e.stopPropagation();
 
         this.clearSelection(true);
       },
@@ -420,7 +420,7 @@ Material Design Dropdown/Typeahead/Combobox control
         }
       },
       _selectItem: function(e) {
-        e.stopImmediatePropagation();
+        e.stopPropagation();
         
         var item = e.currentTarget;
         this.setValue(item.value, true);
