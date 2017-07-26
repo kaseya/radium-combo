@@ -40,12 +40,8 @@ Material Design Dropdown/Typeahead/Combobox control
       user-select: none;
     }
     #dropdown {
-      margin-top: 56px;
       background-color: #FFFFFF;
       box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-    }
-    :host([no-label-float]) #dropdown {
-      margin-top: 36px;
     }
     #clear-icon {
       position: absolute;
@@ -90,7 +86,7 @@ Material Design Dropdown/Typeahead/Combobox control
       <iron-icon id="clear-icon" icon="clear" hidden$="[[!_showClearIcon(showClearButton, _inputValue)]]" on-tap="_clearTapped"></iron-icon>
       <iron-icon id="dropdown-icon" icon="[[_dropdownIcon(_open)]]"></iron-icon>
     </paper-input-container>
-    <iron-dropdown id="dropdown" no-cancel-on-outside-click on-iron-overlay-opened="_dropdownOpened" on-iron-overlay-closed="_dropdownClosed">
+    <iron-dropdown id="dropdown" vertical-align="auto" no-overlap no-cancel-on-outside-click on-iron-overlay-opened="_dropdownOpened" on-iron-overlay-closed="_dropdownClosed">
       <div class="dropdown-content">
         <template is="dom-if" if="[[_checkShowNoMatches(noMatchesLabel, type, _filteredOptions)]]">
           <paper-item value="">
