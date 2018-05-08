@@ -2,9 +2,6 @@
   "name": "radium-combo",
   "version": "0.8.1",
   "description": "Material Design Dropdown/Typeahead/Combobox control",
-  "authors": [
-    "jason gardner <jason.gardner.lv@gmail.com>"
-  ],
   "keywords": [
     "radium",
     "polymer",
@@ -18,10 +15,10 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git://github.com/jasongardnerlv/radium-combo.git"
+    "url": "git://github.com/kaseya/radium-combo.git"
   },
   "license": "MIT",
-  "homepage": "https://github.com/jasongardnerlv/radium-combo",
+  "homepage": "https://github.com/kaseya/radium-combo",
   "ignore": [],
   "dependencies": {
     "polymer": "Polymer/polymer#1.7.0",
